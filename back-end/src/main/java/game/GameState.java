@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class GameState {
 
     private final Cell[] cells;
+    
 
     private GameState(Cell[] cells) {
         this.cells = cells;

@@ -13,7 +13,7 @@ enum Player {
     }
 }
 
-public class Game {
+public class Game { 
     private final Board board;
     private final Player player;
     private final List<Game> history;

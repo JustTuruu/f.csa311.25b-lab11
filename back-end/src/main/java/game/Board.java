@@ -14,7 +14,7 @@ public class Board {
 
     public Board(Player[] cells) {
         this.cells = cells;
-    }
+    } 
 
     public Player getCell(int x, int y) {
         return this.cells[y * 3 + x];
