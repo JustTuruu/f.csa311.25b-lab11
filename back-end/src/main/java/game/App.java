@@ -38,22 +38,22 @@ public class App extends NanoHTTPD {
         Response response;
         
         if (uri.equals("/newgame")) {
-            this.previousGame = this.game; // Store current game for potential undo
+            this.previousGame = this.game;
             this.game = new Game();
             GameState gameplay = GameState.forGame(this.game);
             response = newFixedLengthResponse(Response.Status.OK, "application/json", gameplay.toString());
         } else if (uri.equals("/play")) {
-            this.previousGame = this.game; // Store current game for potential undo
+            this.previousGame = this.game;
             int x = Integer.parseInt(params.get("x"));
             int y = Integer.parseInt(params.get("y"));
             this.game = this.game.play(x, y);
+            // Ensure we're getting the updated player information after the move
             GameState gameplay = GameState.forGame(this.game);
             response = newFixedLengthResponse(Response.Status.OK, "application/json", gameplay.toString());
         } else if (uri.equals("/undo")) {
-            // Implement undo functionality
             if (this.previousGame != null) {
                 this.game = this.previousGame;
-                this.previousGame = null; // Can only undo once
+                this.previousGame = null;
             }
             GameState gameplay = GameState.forGame(this.game);
             response = newFixedLengthResponse(Response.Status.OK, "application/json", gameplay.toString());
@@ -61,7 +61,7 @@ public class App extends NanoHTTPD {
             response = newFixedLengthResponse(Response.Status.NOT_FOUND, "text/plain", "Not Found");
         }
         
-        // Add CORS headers to allow cross-origin requests from the frontend
+        // CORS headers
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type");

@@ -1,16 +1,20 @@
 import React from 'react';
 import { Cell } from './game';
 
-interface Props {
-  cell: Cell
+interface BoardCellProps {
+  cell: Cell;
 }
 
-class BoardCell extends React.Component<Props> {
-  render(): React.ReactNode {
-    const playable = this.props.cell.playable ? 'playable' : '';
+class BoardCell extends React.Component<BoardCellProps> {
+  render() {
+    const { cell } = this.props;
+    const cellClass = `board-cell ${cell.text.toLowerCase()}`;
+    
     return (
-      <div className={`cell ${playable}`}>{this.props.cell.text}</div>
-    )
+      <div className={cellClass}>
+        {cell.text}
+      </div>
+    );
   }
 }
 
